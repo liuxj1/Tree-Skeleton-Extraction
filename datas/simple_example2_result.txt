@@ -1,0 +1,4 @@
+simple_example3 - DSBs£º7, CMSBs£º7, Accuracy: 1.0, Miss_rate: 0.0
+Avg.DSBs£º7.0
+Accuracy£º1.0
+Miss_rate£º0.0
