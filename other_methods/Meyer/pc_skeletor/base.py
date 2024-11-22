@@ -49,98 +49,6 @@ class SkeletonBase(object):
     def save(self, *args):
         pass
 
-    # def show_graph(self, graph: networkx.Graph, pos: Union[np.ndarray, bool] = True, fig_size: tuple = (20, 20)):
-    #     def load_and_preprocess_pcd(file_path):
-    #         # 读取文件并创建点云
-    #         with open(file_path, 'r') as file:
-    #             data_list = [np.fromstring(line.strip().strip('[]'), sep=' ') for line in file]
-    #         data = np.vstack(data_list)
-    #         xyz = data[:, :3]
-    #         # 归一化点云
-    #         min_bound = np.min(xyz, axis=0)
-    #         max_bound = np.max(xyz, axis=0)
-    #         max_range = np.max(max_bound - min_bound)
-    #         normalized_points = (xyz - min_bound) / max_range
-    #         # 随机下采样点云到指定的点数
-    #         points = np.asarray(normalized_points)
-    #         if len(points) <= 1000000:
-    #             target_number_of_points = int(len(points) * 0.20)
-    #         elif len(points) > 1000000 and len(points) <= 2000000:
-    #             target_number_of_points = int(len(points) * 0.15)
-    #         elif len(points) > 2000000 and len(points) <= 3000000:
-    #             target_number_of_points = int(len(points) * 0.10)
-    #         else:
-    #             target_number_of_points = 300000
-    #         # target_number_of_points = int(len(points) * 0.35)
-    #         indices = np.random.choice(len(points), target_number_of_points, replace=False)
-    #         downsampled_points = points[indices]
-    #         return downsampled_points
-    #     file_path = r"D:\skeleton_lines\tree_datas_reality\tree_reality_break_txt\new_tree7_1.txt"
-    #     data_points = load_and_preprocess_pcd(file_path)
-    #     gray_color = [0.5, 0.5, 0.5]  # 灰色的RGB值
-    #     colors = np.tile(gray_color, (len(data_points), 1))  # 将灰色复制到每个点
-    #     pcd = o3d.geometry.PointCloud()
-    #     pcd.points = o3d.utility.Vector3dVector(data_points)  # 将点云数据加载到点云对象中
-    #     pcd.colors = o3d.utility.Vector3dVector(colors)
-    #     # 创建一个空的点云对象
-    #     point_cloud = o3d.geometry.PointCloud()
-    #
-    #     # 检查是否有位置信息，如果没有则使用 networkx 的布局算法
-    #     if pos is True:
-    #         pos = {node: graph.nodes[node]['pos'] for node in graph.nodes()}
-    #     elif isinstance(pos, bool):
-    #         pos = nx.spring_layout(graph)  # 使用spring布局作为备选方案
-    #
-    #     def create_spheres_at_nodes(skeleton, radius=0.00005):
-    #         spheres = []
-    #         for node in skeleton.nodes():
-    #             sphere = o3d.geometry.TriangleMesh.create_sphere(radius=radius)
-    #             sphere.paint_uniform_color([0,1,0])
-    #             sphere.translate(skeleton.nodes[node]['pos'])
-    #             spheres.append(sphere)
-    #         return spheres
-    #     # 提取节点位置
-    #     points = np.array([pos[node] for node in graph.nodes()])
-    #     point_cloud.points = o3d.utility.Vector3dVector(points)
-    #
-    #     # 计算最小生成树
-    #     mst = nx.minimum_spanning_tree(graph)
-    #     spheres = create_spheres_at_nodes(mst)
-    #
-    #
-    #
-    #
-    #     # 创建一个线集对象来表示图的边
-    #     line_set = o3d.geometry.LineSet()
-    #
-    #     # 设置线集的点
-    #     line_set.points = o3d.utility.Vector3dVector(points)
-    #
-    #     # 使用最小生成树的边设置线集的线（边）
-    #     lines = [[list(graph.nodes()).index(u), list(graph.nodes()).index(v)] for u, v in mst.edges()]
-    #     line_set.lines = o3d.utility.Vector2iVector(lines)
-    #
-    #     # 设置点和线的颜色，可根据需要调整
-    #     point_cloud.colors = o3d.utility.Vector3dVector(np.tile([0, 1, 0], (len(points), 1)))  # 红色节点
-    #     line_set.colors = o3d.utility.Vector3dVector(np.tile([0, 1, 0], (len(lines), 1)))  # 绿色边
-    #
-    #     def custom_draw_geometry_with_no_light(geometries):
-    #         vis = o3d.visualization.Visualizer()
-    #         vis.create_window()
-    #
-    #         for geometry in geometries:
-    #             vis.add_geometry(geometry)
-    #
-    #         render_option = vis.get_render_option()
-    #         render_option.light_on = False
-    #         render_option.point_size = 2
-    #         render_option.line_width = 50
-    #         render_option.background_color = np.array([1, 1, 1])
-    #
-    #         vis.run()
-    #         vis.destroy_window()
-    #     # 可视化
-    #     custom_draw_geometry_with_no_light([pcd, point_cloud, line_set] + spheres)
     def show_graph(self, graph: networkx.Graph, pos: Union[np.ndarray, bool] = True, fig_size: tuple = (20, 20)):
         # For more info: https://networkx.org/documentation/stable/reference/drawing.html
         def create_spheres_at_nodes(points, radius=0.002):
@@ -165,7 +73,7 @@ class SkeletonBase(object):
             line_set.colors = o3d.utility.Vector3dVector(colors)
             spheres = create_spheres_at_nodes(points)
             o3d.visualization.draw_geometries([line_set] + spheres)
-            # 保存骨架图为 JSON 文件
+
         graph_data = {
             'nodes': [{'id': node, 'pos': [float(coord) for coord in graph.nodes[node]['pos']]} for node in graph.nodes()],
             'links': [{'source': u, 'target': v} for u, v in graph.edges()]

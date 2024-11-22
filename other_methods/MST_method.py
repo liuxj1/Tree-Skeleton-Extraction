@@ -4,7 +4,7 @@ import json
 from scipy.spatial import distance_matrix
 from scipy.spatial.transform import Rotation as R
 import matplotlib
-matplotlib.use('agg')  # 使用非交互式后端
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from skeleton.process import *
 
@@ -251,11 +251,11 @@ def get_break_skeleton(data_points):
         # Sub-undirected graph
         Gi = extract_subgraph(G, current_cluster_indices)
         # Set the root node X threshold
-        X_threshold = 0.02  # 你可以根据需要调整此阈值
+        X_threshold = 0.02
         # Root node collection  X
         X = select_label_root_set(cluster_points_data, current_cluster_indices, X_threshold)
         # Calculate node value
-        node_values_clusters = calculate_node_values(Gi, X)
+        node_values_clusters = calculate_node_values(Gi, X, 60)
         node_values.update(node_values_clusters)
 
     clusters = cluster_points(G, data_points, node_values)
@@ -275,21 +275,21 @@ def get_break_skeleton(data_points):
     cleaned_skeleton.remove_nodes_from(isolated_nodes)
 
     color_map = assign_colors_to_components(cleaned_skeleton)
-    point_cloud, line_set = create_point_cloud_and_lineset(cleaned_skeleton, color_map)  # 补全蓝色
+    point_cloud, line_set = create_point_cloud_and_lineset(cleaned_skeleton, color_map)
 
     gray_color = [0.5, 0.5, 0.5]
     colors = np.tile(gray_color, (len(data_points), 1))
     pcd_h = o3d.geometry.PointCloud()
     pcd_h.points = o3d.utility.Vector3dVector(data_points)
     pcd_h.colors = o3d.utility.Vector3dVector(colors)
-    custom_draw_geometry_with_no_light([pcd_h])
+    # custom_draw_geometry_with_no_light([pcd_h])
 
     spheres = create_spheres_at_nodes(cleaned_skeleton, color_map)
 
     custom_draw_geometry_with_no_light([pcd_h, point_cloud] + line_set + spheres)
 
 if __name__ == "__main__":
-    txt_path = r"D:\experimental_data\skeleton_lines_reality\tree_datas_reality\reality_tree_txt\new_tree7_1.txt"
-    data_points = load_and_preprocess_pcd(txt_path)
+    txt_path = "../datas/input_pcd/reality_example1.txt"
+    data_points = load_and_preprocess_pcd(txt_path, "reality")
     get_break_skeleton(data_points)
 

@@ -46,14 +46,15 @@ We have given the data file directory format. You can refer to the data director
    ```
 python main.py
    --processing_mode single \
-   --input_pcd_path "../datas/input_pcd/simple_example3.txt" \
-   --datasets_type "synthetic" \
+   --input_pcd_path "datas/input_pcd/reality_example1.txt" \
+   --datasets_type "reality" \
    --disconnections_num 8
    ```
+
 ### 2.Visualization
 You can visualize the skeleton effect, where the visualization interface 1 is the skeleton without Laplace smoothing, and the interface 2 is the skeleton after Laplace smoothing.<br>
 ```
-python -m Visualization.Visualize_progress --cmsbs "../datas/CMSBs/reality_example1_CMSBs.json" --bps "../datas/BPs/reality_example1_BPs.txt"
+python -m Visualization.Visualize_progress --cmsbs "datas/CMSBs/reality_example1_CMSBs.json" --bps "datas/BPs/reality_example1_BPs.txt"
 ``` 
 <div style="display: flex; justify-content: space-around;">
   <img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/1.png" alt="Completed Skeleton" width="450"/>
@@ -64,9 +65,9 @@ python -m Visualization.Visualize_progress --cmsbs "../datas/CMSBs/reality_examp
 For `reality`, the evaluation method needs to be combined with the original point cloud for visualization, run `skeleton\reality_visual_evaluation.py`<br>
 ```
 python reality_visual_evaluation.py \
-   --pcd "../datas/input_pcd/reality_example1.txt" \
-   --cmsbs "../datas/CMSBs/reality_example1_CMSBs.json" \
-   --bps "../datas/BPs/reality_example1_BPs.txt"
+   --pcd "datas/input_pcd/reality_example1.txt" \
+   --cmsbs "datas/CMSBs/reality_example1_CMSBs.json" \
+   --bps "datas/BPs/reality_example1_BPs.txt"
 ```
 <img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/3.png" alt="Reality Visual Evaluation" width="450"/>
 
@@ -74,10 +75,10 @@ For `synthetic`, we define the evaluation method.
 ```
 python synthetic_evaluation.py \
    --processing_mode "single"
-   --cmsbs "../datas/CMSBs/complex_example2_CMSBs.json" \
-   --bps "../datas/BPs/complex_example2_BPs.txt" \
-   --skeleton_path "../datas/skeleton/complex_example2_imitaet_S.json" \
-   --output_file_path "../datas/complex_example2_result.txt"
+   --cmsbs "datas/CMSBs/complex_example2_CMSBs.json" \
+   --bps "datas/BPs/complex_example2_BPs.txt" \
+   --skeleton_path "datas/skeleton/complex_example2_imitaet_S.json" \
+   --output_file_path "datas/complex_example2_result.txt"
 ``` 
 Evaluation method：<br>
       (1) Overlay and match the completed skeleton with the original full skeleton.<br>
@@ -99,4 +100,11 @@ For `synthetic`, `run skeleton/synthetic_evaluation.py` to perform batch evaluat
 ## MST Method
 `run MST_method.py`
 ## Laplace Contraction
-`run Meyer/pcd_skeletor/laplacian.py`. Then,  `run Meyer_method.py`
+You need
+```
+cd other_methods/Meyer
+pip install --upgrade pip setuptools
+pip install -r requirements.txt
+pip install -e .
+```
+`run Meyer/pcd_skeletor/laplacian.py`. You will get `1.jsonThen`, then `run Meyer_method.py`
