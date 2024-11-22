@@ -39,13 +39,18 @@ Tree-Skeleton-Extraction/
   
 2.When using different datasets, you need to determine the `datasets_type`, including `reality` and `synthetic`, where `complex` and `simple` both belong to `synthetic`.<br>
 3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple<br>
+<<<<<<< HEAD
 ## Start
+=======
+## For a single tree
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 ### 1.Get skeleton
 You need to set `Processing_mode` to `single` in `main.py`, and give the corresponding input point cloud file and output file path in the corresponding position.
 We have given the data file directory format. You can refer to the data directory to put the corresponding data into the specified location.Then，Run the following command.
    ``` For a single tree
 python main.py
    --processing_mode single \
+<<<<<<< HEAD
    --input_pcd_path "datas/single_data/input_pcd/reality_example1.txt" \
    --datasets_type "reality" \
    --disconnections_num 8
@@ -57,12 +62,21 @@ python main.py
    --datasets_type reality \
    --input_pcd_folder "datas/reality/input_pcd" \
    --disconnections_num 0
+=======
+   --input_pcd_path "datas/input_pcd/reality_example1.txt" \
+   --datasets_type "reality" \
+   --disconnections_num 8
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
    ```
 
 ### 2.Visualization
 You can visualize the skeleton effect, where the visualization interface 1 is the skeleton without Laplace smoothing, and the interface 2 is the skeleton after Laplace smoothing.<br>
 ```
+<<<<<<< HEAD
 python -m Visualization.Visualize_progress --cmsbs "datas/single_data/CMSBs/reality_example1_CMSBs.json" --bps "datas/single_data/BPs/reality_example1_BPs.txt"
+=======
+python -m Visualization.Visualize_progress --cmsbs "datas/CMSBs/reality_example1_CMSBs.json" --bps "datas/BPs/reality_example1_BPs.txt"
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 ``` 
 <div style="display: flex; justify-content: space-around;">
   <img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/1.png" alt="Completed Skeleton" width="450"/>
@@ -73,13 +87,20 @@ python -m Visualization.Visualize_progress --cmsbs "datas/single_data/CMSBs/real
 For `reality`, the evaluation method needs to be combined with the original point cloud for visualization, run `skeleton\reality_visual_evaluation.py`<br>
 ```
 python reality_visual_evaluation.py \
+<<<<<<< HEAD
    --pcd "datas/single_data/input_pcd/reality_example1.txt" \
    --cmsbs "datas/single_data/CMSBs/reality_example1_CMSBs.json" \
    --bps "datas/single_data/BPs/reality_example1_BPs.txt"
+=======
+   --pcd "datas/input_pcd/reality_example1.txt" \
+   --cmsbs "datas/CMSBs/reality_example1_CMSBs.json" \
+   --bps "datas/BPs/reality_example1_BPs.txt"
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 ```
 <img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/3.png" alt="Reality Visual Evaluation" width="450"/>
 
 For `synthetic`, we define the evaluation method.
+<<<<<<< HEAD
 ```For a single tree
 python synthetic_evaluation.py \
    --processing_mode "single"
@@ -95,6 +116,15 @@ python synthetic_evaluation.py \
    --bps "datas/complex/BPs" \
    --skeleton_path "datas/complex/skeleton" \
    --output_file_path "datas/complex/complex_result.txt"
+=======
+```
+python synthetic_evaluation.py \
+   --processing_mode "single"
+   --cmsbs "datas/CMSBs/complex_example2_CMSBs.json" \
+   --bps "datas/BPs/complex_example2_BPs.txt" \
+   --skeleton_path "datas/skeleton/complex_example2_imitaet_S.json" \
+   --output_file_path "datas/complex_example2_result.txt"
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 ``` 
 Evaluation method：<br>
       (1) Overlay and match the completed skeleton with the original full skeleton.<br>
@@ -116,7 +146,11 @@ For `synthetic`, `run skeleton/synthetic_evaluation.py` to perform batch evaluat
 ## MST Method
 `run MST_method.py`
 ## Laplace Contraction
+<<<<<<< HEAD
 You need to refer to: [pc-skeletor](https://github.com/meyerls/pc-skeletor)
+=======
+You need
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 ```
 cd other_methods/Meyer
 pip install --upgrade pip setuptools

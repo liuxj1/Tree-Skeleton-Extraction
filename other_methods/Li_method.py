@@ -220,7 +220,11 @@ def get_break_skeleton(data_points):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     input_pcd_path = "../datas/single_data/input_pcd/reality_example1.txt"     # Input incomplete tree point cloud
+=======
+    input_pcd_path = "../datas/input_pcd/reality_example1.txt"     # Input incomplete tree point cloud
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 
     data_points = load_and_preprocess_pcd(input_pcd_path, "reality")
     get_break_skeleton(data_points)

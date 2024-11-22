@@ -54,11 +54,19 @@ if __name__ == '__main__':
         if not input_pcd_folder:
             raise ValueError("`input_pcd_folder` must be specified for batch processing.")
 
+<<<<<<< HEAD
         output_MB_pcd_folder = f"datas/{type_name}/MB_pcd"  # Store virtual point cloud files after simulating branch breakage
         output_skeleton_folder = f"datas/{type_name}/skeleton"  # The complete skeleton folder for the simulated point cloud
         output_MSBs_folder = f"datas/{type_name}/MSBs"  # Skeleton folder where missing skeleton branches are stored
         output_BPs_folder = f"datas/{type_name}/BPs"  # Folder for storing branch point pairs used for reconnection
         output_CMSBs_folder = f"datas/{type_name}/CMSBs"  # Store the completed skeleton
+=======
+        output_MB_pcd_folder = "datas/MB_pcd"  # Store virtual point cloud files after simulating branch breakage
+        output_skeleton_folder = "datas/skeleton"  # The complete skeleton folder for the simulated point cloud
+        output_MSBs_folder = "datas/MSBs"  # Skeleton folder where missing skeleton branches are stored
+        output_BPs_folder = "datas/BPs"  # Folder for storing branch point pairs used for reconnection
+        output_CMSBs_folder = "datas/CMSBs"  # Store the completed skeleton
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 
         # 根据 type_name 设置 disconnections_num 和 datasets_type
         if type_name == 'complex':
@@ -84,11 +92,19 @@ if __name__ == '__main__':
             raise ValueError(
                 "`input_pcd_path`, `datasets_type`, and `disconnections_num` must be specified for single processing.")
 
+<<<<<<< HEAD
         output_MB_pcd_folder = "datas/single_data/MB_pcd"  # Store virtual point cloud files after simulating branch breakage
         output_skeleton_folder = "datas/single_data/skeleton"  # The complete skeleton folder for the simulated point cloud
         output_MSBs_folder = "datas/single_data/MSBs"  # Skeleton folder where missing skeleton branches are stored
         output_BPs_folder = "datas/single_data/BPs"  # Folder for storing branch point pairs used for reconnection
         output_CMSBs_folder = " datas/single_data/CMSBs"  # Store the completed skeleton
+=======
+        output_MB_pcd_folder = "datas/MB_pcd"  # Store virtual point cloud files after simulating branch breakage
+        output_skeleton_folder = "datas/skeleton"  # The complete skeleton folder for the simulated point cloud
+        output_MSBs_folder = "datas/MSBs"  # Skeleton folder where missing skeleton branches are stored
+        output_BPs_folder = "datas/BPs"  # Folder for storing branch point pairs used for reconnection
+        output_CMSBs_folder = " datas/CMSBs"  # Store the completed skeleton
+>>>>>>> 6bcd415a7f2b1630dd7d2b0d420483c50582b779
 
         main(input_pcd_path, output_MB_pcd_folder, output_skeleton_folder, output_MSBs_folder,
              output_BPs_folder, output_CMSBs_folder, disconnections_num, datasets_type)
