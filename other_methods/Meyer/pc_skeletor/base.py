@@ -171,7 +171,7 @@ class SkeletonBase(object):
             'links': [{'source': u, 'target': v} for u, v in graph.edges()]
         }
         import json
-        with open(r"C:\Users\Administrator\Desktop\1.json", 'w') as f:
+        with open(r"../../../datas/1.json", 'w') as f:
             json.dump(graph_data, f, indent=4)
         print(f'Graph skeleton saved')
         # else:

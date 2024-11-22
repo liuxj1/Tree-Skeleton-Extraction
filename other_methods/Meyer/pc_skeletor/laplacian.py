@@ -604,29 +604,7 @@ class SLBC(LaplacianBasedContractionBase):
             o3d.visualization.draw_geometries([pcd], point_show_normal=True)
 
         return ret
-
-
-if __name__ == "__main__":
-    import json
-
-    def save_skeleton_as_json(self, graph: nx.Graph, file_path: str):
-        data = {
-            "nodes": [
-                {"id": node, "pos": graph.nodes[node]['pos']}
-                for node in graph.nodes
-            ],
-            "edges": [
-                {"source": u, "target": v}
-                for u, v in graph.edges
-            ]
-        }
-
-        with open(file_path, 'w') as f:
-            json.dump(data, f, indent=4)
-        print(f"Skeleton graph saved to {file_path}")
-
-
-    def load_and_preprocess_pcd(file_path, type):
+def load_and_preprocess_pcd(file_path, type):
         with open(file_path, 'r') as file:
             data_list = [np.fromstring(line.strip().strip('[]'), sep=' ') for line in file]
         data = np.vstack(data_list)
@@ -653,9 +631,10 @@ if __name__ == "__main__":
         indices = np.random.choice(len(points), target_number_of_points, replace=False)
         downsampled_points = points[indices]
         return downsampled_points
-    # "D:\skeleton_lines\tree_datas_reality\tree_reality_break_txt\new_tree7_1.txt"
-    file_path = r"D:\experimental_data\skeleton_lines_reality\tree_datas_reality\reality_tree_txt\new_tree7_1.txt"
-    data_points = load_and_preprocess_pcd(file_path)
+
+if __name__ == "__main__":
+    file_path = "path/to/pcd_file"     # Input incomplete tree point cloud
+    data_points = load_and_preprocess_pcd(file_path, "reality")
 
     pcd = o3d.geometry.PointCloud()
 

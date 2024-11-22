@@ -1,8 +1,8 @@
 from scipy.spatial.distance import cdist
 from tqdm import tqdm
 import json
-from get_CS import completion
-from process import *
+from skeleton.get_CS import completion
+from skeleton.process import *
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 
