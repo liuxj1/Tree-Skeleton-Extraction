@@ -27,11 +27,9 @@ def main(input_pcd_path, output_MB_pcd_folder, output_skeleton_folder, output_MS
 
 
 if __name__ == '__main__':
-    # 设置随机种子
     random.seed(42)
     np.random.seed(42)
 
-    # 使用 argparse 解析命令行参数
     parser = argparse.ArgumentParser(description="Run Tree Skeleton Extraction")
     parser.add_argument('--processing_mode', required=True, choices=['single', 'batch'],
                         help="Processing mode: single or batch")
@@ -74,7 +72,6 @@ if __name__ == '__main__':
             disconnections_num = 0
             datasets_type = 'reality'
 
-        # 遍历文件夹中的所有文件
         for file_name in os.listdir(input_pcd_folder):
             input_pcd_path = os.path.join(input_pcd_folder, file_name)
             main(input_pcd_path, output_MB_pcd_folder, output_skeleton_folder, output_MSBs_folder,

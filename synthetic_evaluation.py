@@ -190,7 +190,6 @@ if __name__ == "__main__":
     random.seed(42)
     np.random.seed(42)
 
-    # 使用 argparse 解析命令行参数
     parser = argparse.ArgumentParser(description="Process skeletons for synthetic dataset evaluation")
     parser.add_argument('--processing_mode', required=True, choices=['single', 'batch'], help="Processing mode: single or batch")
     parser.add_argument('--cmsbs_path', required=True, help="Path to the CMSBs file or folder")
@@ -199,7 +198,6 @@ if __name__ == "__main__":
     parser.add_argument('--output_file_path', required=True, help="Path to the output result file")
     args = parser.parse_args()
 
-    # 根据 processing_mode 选择单文件或批处理模式
     all_accuracy = []
     all_misdetection_rate = []
     average_break = []
@@ -216,7 +214,6 @@ if __name__ == "__main__":
                     skeleton = os.path.join(args.skeleton_path, f"{name}_imitaet_S.json")
                     process_skeletons(CMSBs, BPs, skeleton, name, all_accuracy, all_misdetection_rate, average_break, output_file)
 
-            # 计算并输出平均值
             average = sum(average_break) / len(average_break)
             average_accuracy = sum(all_accuracy) / len(all_accuracy)
             average_misdetection_rate = sum(all_misdetection_rate) / len(all_misdetection_rate)
@@ -228,7 +225,6 @@ if __name__ == "__main__":
             output_file.write(f"Miss_rate：{average_misdetection_rate}\n")
             plot_accuracy(all_accuracy, all_misdetection_rate)
     else:
-        # 单文件模式
         with open(args.output_file_path, "w") as output_file:
             CMSBs = args.cmsbs_path
             BPs_path = args.bps_path
@@ -237,7 +233,6 @@ if __name__ == "__main__":
             name = base_filename.split('_CMSBs')[0]
             process_skeletons(CMSBs, BPs_path, skeleton_path, name, all_accuracy, all_misdetection_rate, average_break, output_file)
 
-            # 计算并输出结果
             average = sum(average_break) / len(average_break)
             average_accuracy = sum(all_accuracy) / len(all_accuracy)
             average_misdetection_rate = sum(all_misdetection_rate) / len(all_misdetection_rate)
