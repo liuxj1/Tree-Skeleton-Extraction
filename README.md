@@ -8,7 +8,7 @@ The point cloud data obtained by 3D reconstruction of the tree body is missing, 
 ## Installation from Source
    ```
 git clone https://github.com/liuxj1/Tree-Skeleton-Extraction.git
-cd Tree_Skeleton_extraction
+cd Tree-Skeleton-extraction
 conda create -n skeleton python=3.7.0
 pip install -r requirements.txt
    ```
