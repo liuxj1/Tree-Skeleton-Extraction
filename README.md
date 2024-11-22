@@ -27,9 +27,9 @@ Tree-Skeleton-Extraction/
 └── Visualization/
 ```
 ## Noteworthy
-1.We provide two data sets.
-2.When using different datasets, you need to determine the `datasets_type`, including `reality` and `synthetic`, where `complex` and `simple` both belong to `synthetic`.
-3.Among them, disconnections_num is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple
+1.We provide two data sets.<br>
+2.When using different datasets, you need to determine the `datasets_type`, including `reality` and `synthetic`, where `complex` and `simple` both belong to `synthetic`.<br>
+3.Among them, disconnections_num is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple<br>
 ## For a single tree
 ### 1.Get skeleton
 You need to set `Processing_mode` to `single` in `main.py`, and give the corresponding input point cloud file and output file path in the corresponding position.
@@ -38,33 +38,31 @@ We have given the data file directory format. You can refer to the data director
 python main.py
    ```
 ### 2.Visualization
-You can run `Visualization/Visualize_progress.py` to visualize the skeleton effect, where the visualization interface 1 is the skeleton without Laplace smoothing, and the interface 2 is the skeleton after Laplace smoothing.
+You can run `Visualization/Visualize_progress.py` to visualize the skeleton effect, where the visualization interface 1 is the skeleton without Laplace smoothing, and the interface 2 is the skeleton after Laplace smoothing.<br>
 ![Completed Skeleton](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/1.png)
 ![Laplace smoothing](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/2.png)
 ### 3.Evaluation
-For `reality`, the evaluation method needs to be combined with the original point cloud for visualization, run `skeleton\reality_visual_evaluation.py`
+For `reality`, the evaluation method needs to be combined with the original point cloud for visualization, run `skeleton\reality_visual_evaluation.py`<br>
 ![Reality Visual Evaluation](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/3.png)
 
-For `synthetic`, we define the evaluation method and run `skeleton/synthetic_evaluation.py`.
-Evaluation method：
-   (1) Overlay and match the completed skeleton with the original full skeleton.
-   (2) In the completion area, select two connected skeleton nodes (red lines in Fig. 15(a)) and find the nearest blue reference nodes.
-   (3) Compare the number of nodes between these two reference nodes, based on the full skeleton's topology. 
-   (4) If the count is 3 or fewer, the skeleton completion is considered correct (Fig. 15a).
+For `synthetic`, we define the evaluation method and run `skeleton/synthetic_evaluation.py`.Evaluation method：<br>
+      (1) Overlay and match the completed skeleton with the original full skeleton.<br>
+      (2) In the completion area, select two connected skeleton nodes (red lines in Fig. 15(a)) and find the nearest blue reference nodes.<br>
+      (3) Compare the number of nodes between these two reference nodes, based on the full skeleton's topology. <br>
+      (4) If the count is 3 or fewer, the skeleton completion is considered correct (Fig. 15a).<br>
 ![Reality Visual Evaluation](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/3.png)
 
 ## For batch data processing
-You need to set `Processing_mode` to `batch` in `main.py`. Then, put the point cloud data in the same folder (note that different data sets are separated)
-For `synthetic`, Run `skeleton/synthetic_evaluation.py` to perform batch evaluation and calculate the overall `Accuracy` and `Misse Rate`.
-For example,
+You need to set `Processing_mode` to `batch` in `main.py`. Then, put the point cloud data in the same folder (note that different data sets are separated)<br>
+For `synthetic`, `run skeleton/synthetic_evaluation.py` to perform batch evaluation and calculate the overall `Accuracy` and `Misse Rate`. For example,<br>
 | Label  | Avg. DSBs | Accuracy |  Miss Rate|
 | ------------- | ------------- | ------------- | ------------- |
 | Complex | 28  | 86.83%  | 0.95%  |
 | Simple  | 8 | 95.68%  | 1.03%  |
 # Other methods
 ## Li Method
-Run `Li_method.py`
+`run Li_method.py`
 ## MST Method
-Run `MST_method.py`
+`run MST_method.py`
 ## Laplace Contraction
-Run `Meyer/pcd_skeletor/laplacian.py`. Then,  Run `Meyer_method.py`
+`run Meyer/pcd_skeletor/laplacian.py`. Then,  `run Meyer_method.py`
