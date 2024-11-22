@@ -32,7 +32,11 @@ Tree-Skeleton-Extraction/
 └── Visualization/
 ```
 ## Noteworthy
-1.We provide two data sets.<br>
+1.We provide two datasets. <br>
+- Datasets:
+  - [Datasets Link](https://drive.google.com/drive/folders/1-F2EuWzzmbOaRrjwM_7wXedgUqyQjoXI?usp=sharing)
+  - [Test Datasets Link](https://drive.google.com/drive/folders/1AVYqXS4l93UGSojt150_JB6L2u9JvjGK?usp=sharing)
+  
 2.When using different datasets, you need to determine the `datasets_type`, including `reality` and `synthetic`, where `complex` and `simple` both belong to `synthetic`.<br>
 3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple<br>
 ## For a single tree
@@ -64,8 +68,7 @@ python reality_visual_evaluation.py \
    --cmsbs "../datas/CMSBs/reality_example1_CMSBs.json" \
    --bps "../datas/BPs/reality_example1_BPs.txt"
 ```
-<img src="https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/3.png" alt="Reality Visual Evaluation" width="450"/>
-![Reality Visual Evaluation](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/3.png)
+<img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/3.png" alt="Reality Visual Evaluation" width="450"/>
 
 For `synthetic`, we define the evaluation method.
 ```
@@ -81,7 +84,7 @@ Evaluation method：<br>
       (2) In the completion area, select two connected skeleton nodes (red lines in Fig. 15(a)) and find the nearest blue reference nodes.<br>
       (3) Compare the number of nodes between these two reference nodes, based on the full skeleton's topology. <br>
       (4) If the count is 3 or fewer, the skeleton completion is considered correct (Fig. 15a).<br>
-<img src="https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/3.png" alt="Reality Visual Evaluation" width="450"/>
+<img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/4.png" alt="synthetic evaluation method" width="450"/>
 
 ## For batch data processing
 You need to set `Processing_mode` to `batch` in `main.py`. Then, put the point cloud data in the same folder (note that different data sets are separated)<br>
