@@ -39,6 +39,9 @@ python main.py
    ```
 ### 2.Visualization
 You can run `Visualization/Visualize_progress.py` to visualize the skeleton effect, where the visualization interface 1 is the skeleton without Laplace smoothing, and the interface 2 is the skeleton after Laplace smoothing.
-
 ![Completed Skeleton](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/1.png)
 ![Laplace smoothing](https://github.com/liuxj1/Tree-Skeleton-Extraction/process_files/2.png)
+### 3.Evaluation
+For `reality`, the evaluation method needs to be combined with the original point cloud for visualization.
+
+For `synthetic`, we define the evaluation method and run `skeleton/synthetic_evaluation.py`
