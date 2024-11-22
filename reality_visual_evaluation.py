@@ -3,7 +3,7 @@ import json
 import argparse
 import matplotlib
 from skeleton.process import *
-matplotlib.use('agg')  # 使用非交互式后端
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from scipy.spatial.transform import Rotation as R
 

@@ -4,7 +4,7 @@ import json
 import random
 import matplotlib
 from scipy.spatial.transform import Rotation as R
-matplotlib.use('agg')  # 使用非交互式后端
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from skeleton.process import *
 
