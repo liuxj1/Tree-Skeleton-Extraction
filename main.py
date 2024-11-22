@@ -92,3 +92,5 @@ if __name__ == '__main__':
 
         main(input_pcd_path, output_MB_pcd_folder, output_skeleton_folder, output_MSBs_folder,
              output_BPs_folder, output_CMSBs_folder, disconnections_num, datasets_type)
+
+

@@ -151,3 +151,4 @@ def generate_skeleton(skeleton_nodes, clusters,data_points):
                     if min_distance < 0.003:
                         skeleton.add_edge(i, j)
     return skeleton
+

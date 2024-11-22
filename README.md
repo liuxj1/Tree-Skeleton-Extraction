@@ -124,4 +124,4 @@ pip install --upgrade pip setuptools
 pip install -r requirements.txt
 pip install -e .
 ```
-`run Meyer/pcd_skeletor/laplacian.py`. You will get `1.jsonThen`, then `run Meyer_method.py`
+`run Meyer/pcd_skeletor/laplacian.py`. You will get `1.jsonThen`, then `run Meyer_method.py` 

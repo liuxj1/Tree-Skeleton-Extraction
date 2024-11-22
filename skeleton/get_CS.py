@@ -274,4 +274,3 @@ def completion(updated_skeleton, output_BPs_filename, output_CMSBs_filename):
 
 
 
-

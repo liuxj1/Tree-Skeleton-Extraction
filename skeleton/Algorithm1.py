@@ -58,3 +58,4 @@ def Ring_Structure_Detection_and_Filtering(first_pair_info):
         else:
             break
     return first_pair_info
+
