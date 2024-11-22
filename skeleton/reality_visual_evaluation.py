@@ -3,60 +3,15 @@ import numpy as np
 import networkx as nx
 import json
 import matplotlib
-from scipy.spatial.transform import Rotation as R
+from skeleton.process import *
 matplotlib.use('agg')  # 使用非交互式后端
 import matplotlib.pyplot as plt
-from skeleton.process import *
+from scipy.spatial.transform import Rotation as R
 
 def load_graph_json(filename):
     with open(filename, 'r') as f:
         graph_json = json.load(f)
     return nx.node_link_graph(graph_json)
-
-def extract_skeleton_subgraphs(skeleton):
-    """
-    Extract all connected components from a complete skeleton graph, returning each component as a complete subgraph.
-    :param skeleton: The complete NetworkX graph.
-    :return: A list containing all subgraphs.
-    """
-    connected_components = nx.connected_components(skeleton)
-    subgraphs = [skeleton.subgraph(component).copy() for component in connected_components]
-    return subgraphs
-def laplacian_smoothing(skeleton, node_positions, iterations=5, alpha=0.5):
-    """
-    Perform Laplace smoothing on a skeleton graph.
-    :param skeleton: NetworkX graph representing the skeleton.
-    :param node_positions: A dictionary whose keys are nodes and whose values are the (x, y, z) coordinates of the nodes.
-    :param iterations: The number of smoothing iterations.
-    :param alpha: Smoothing factor that controls the interpolation weight between new and old positions.
-    """
-    for _ in range(iterations):
-        new_positions = {}
-        for node in skeleton.nodes():
-            if skeleton.degree(node) > 1:  # Smooth only internal nodes
-                neighbors = list(skeleton.neighbors(node))
-                centroid = np.mean([node_positions[neighbor] for neighbor in neighbors], axis=0)
-                original = np.array(node_positions[node])
-                new_positions[node] = alpha * centroid + (1 - alpha) * original
-            else:
-                new_positions[node] = node_positions[node]
-        node_positions.update(new_positions)
-    return node_positions
-def smooth_all_subgraphs(subgraphs):
-    smoothed_positions_all = []
-    for subgraph in subgraphs:
-        node_positions_sub = {node: subgraph.nodes[node]['pos'] for node in subgraph.nodes()}
-        smoothed_positions_sub = laplacian_smoothing(subgraph, node_positions_sub, iterations=10, alpha=0.5)
-        smoothed_positions_all.append(smoothed_positions_sub)
-    return smoothed_positions_all
-def merge_skeletons(subgraphs, smoothed_positions_all):
-    merged_skeleton = nx.Graph()
-    for subgraph, smoothed_positions in zip(subgraphs, smoothed_positions_all):
-        for node in subgraph.nodes():
-            merged_skeleton.add_node(node, pos=smoothed_positions[node])
-        for u, v in subgraph.edges():
-            merged_skeleton.add_edge(u, v)
-    return merged_skeleton
 
 def lines_to_cylinders(line_set, radius=0.000001):
     cylinders = []
@@ -182,24 +137,16 @@ def custom_draw_geometry_with_no_light(geometries):
     vis.run()
     vis.destroy_window()
 
-def process_and_draw(new_skeleton, color_map, finally_pairs, process=True):
-    if process:
-        skeleton_subgraphs = extract_skeleton_subgraphs(new_skeleton)
-        smoothed_positions_all = smooth_all_subgraphs(skeleton_subgraphs)
-        new_skeleton = merge_skeletons(skeleton_subgraphs, smoothed_positions_all)
 
-    point_cloud, line_set = create_point_cloud_and_lineset(new_skeleton, color_map, finally_pairs)
-    spheres = create_spheres_at_nodes(new_skeleton, color_map)
-    custom_draw_geometry_with_no_light([point_cloud] + line_set + spheres)
-
-def main(CMSBs_path,BPs_path):
+def main(pcd_path, CMSBs_path,BPs_path):
     new_skeleton = load_graph_json(CMSBs_path)
-    # data_points = load_and_preprocess_pcd(pcd_path, 'reality')
-    # gray_color = [0.5, 0.5, 0.5]  # 灰色的RGB值
-    # colors = np.tile(gray_color, (len(data_points), 1))
-    # pcd = o3d.geometry.PointCloud()
-    # pcd.points = o3d.utility.Vector3dVector(data_points)
-    # pcd.colors = o3d.utility.Vector3dVector(colors)
+    data_points = load_and_preprocess_pcd(pcd_path, "reality")
+
+    gray_color = [0.5, 0.5, 0.5]
+    colors = np.tile(gray_color, (len(data_points), 1))
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(data_points)
+    pcd.colors = o3d.utility.Vector3dVector(colors)
     # custom_draw_geometry_with_no_light([pcd])
 
     with open(BPs_path, 'r') as f:
@@ -207,6 +154,8 @@ def main(CMSBs_path,BPs_path):
         content_2 = f.readline()
         finally_pairs = eval(content_1)
         all_break_num = eval(content_2) - 1
+    print(len(finally_pairs))
+    print(all_break_num)
 
     color_map = assign_colors_to_components(new_skeleton)
 
@@ -224,18 +173,28 @@ def main(CMSBs_path,BPs_path):
         for node in component:
             color_map[node] = color
 
-    # No Laplace smoothing
-    process_and_draw(new_skeleton, color_map, finally_pairs, process=False)
+    point_cloud, line_set = create_point_cloud_and_lineset(new_skeleton, color_map,finally_pairs)
 
-    # Laplace smoothing
-    process_and_draw(new_skeleton, color_map, finally_pairs, process=True)
+    spheres = create_spheres_at_nodes(new_skeleton, color_map)
+
+    # custom_draw_geometry_with_no_light([point_cloud] + line_set + spheres)
+
+
+    gray_color = [0.5, 0.5, 0.5]
+    colors = np.tile(gray_color, (len(data_points), 1))
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(data_points)
+    pcd.colors = o3d.utility.Vector3dVector(colors)
+    custom_draw_geometry_with_no_light([pcd, point_cloud] + line_set + spheres)
+
+
+    Misdetection_rate = (all_break_num - len(finally_pairs)) / all_break_num
+    print("漏检率 = ", Misdetection_rate)
 
 if __name__ == '__main__':
-    # input_pcd = "../datas/input_pcd/reality_example1.txt"
+    input_pcd = "../datas/input_pcd/reality_example1.txt"
 
     CMSBs_path = "../datas/CMSBs/reality_example1_CMSBs.json"   # Stores skeleton files that complete missing skeleton branches
     BPs_path = "../datas/BPs/reality_example1_BPs.txt"    # Store branch point pairs for reconnection
-    main(CMSBs_path, BPs_path)
-
-
+    main(input_pcd, CMSBs_path, BPs_path)
 
