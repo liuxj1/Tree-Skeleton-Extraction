@@ -62,7 +62,7 @@ if __name__ == '__main__':
         output_BPs_folder = os.path.abspath(os.path.join(current_script_dir, f"datas/{type_name}/BPs"))  # Folder for storing branch point pairs used for reconnection
         output_CMSBs_folder = os.path.abspath(os.path.join(current_script_dir, f"datas/{type_name}/CMSBs"))  # Store the completed skeleton
 
-        # 根据 type_name 设置 disconnections_num 和 datasets_type
+        # Set disconnections_num and datasets_type according to type_name
         if type_name == 'complex':
             disconnections_num = 28
             datasets_type = 'synthetic'
