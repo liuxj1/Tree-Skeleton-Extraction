@@ -117,7 +117,6 @@ For `synthetic`, `run skeleton/synthetic_evaluation.py` to perform batch evaluat
 ## MST Method
 `run MST_method.py`
 ## Laplace Contraction
-<<<<<<< HEAD
 You need to refer to: [pc-skeletor](https://github.com/meyerls/pc-skeletor)
 ```
 cd other_methods/Meyer
