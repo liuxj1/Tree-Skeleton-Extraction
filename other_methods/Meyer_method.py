@@ -185,7 +185,7 @@ def main(json_path, pcd_path):
     custom_draw_geometry_with_no_light([pcd, point_cloud] + line_set + spheres)
 
 if __name__ == "__main__":
-    json_path = "../datas/1.json"
-    pcd_path = "../datas/input_pcd/reality_example1.txt"
+    json_path = "../datas/single_data/1.json"
+    pcd_path = "../datas/single_data/input_pcd/reality_example1.txt"
     main(json_path, pcd_path)
 

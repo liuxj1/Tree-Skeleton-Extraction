@@ -289,7 +289,7 @@ def get_break_skeleton(data_points):
     custom_draw_geometry_with_no_light([pcd_h, point_cloud] + line_set + spheres)
 
 if __name__ == "__main__":
-    txt_path = "../datas/input_pcd/reality_example1.txt"
+    txt_path = "../datas/single_data/input_pcd/reality_example1.txt"
     data_points = load_and_preprocess_pcd(txt_path, "reality")
     get_break_skeleton(data_points)
 
