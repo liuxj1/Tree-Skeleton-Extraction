@@ -38,7 +38,7 @@ Tree-Skeleton-Extraction/
   - [Test Datasets Link](https://drive.google.com/drive/folders/1AVYqXS4l93UGSojt150_JB6L2u9JvjGK?usp=sharing)
   
 2.When using different datasets, you need to determine the `datasets_type`, including `reality` and `synthetic`, where `complex` and `simple` both belong to `synthetic`.<br>
-3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple<br>
+3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in `complex` and 8 in `simple`. <br>
 ## Start
 ### 1.Get skeleton
 You need to set `Processing_mode` to `single` in `main.py`, and give the corresponding input point cloud file and output file path in the corresponding position.
