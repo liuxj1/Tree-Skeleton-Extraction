@@ -1,6 +1,6 @@
 import random
 import json
-from process import *
+from skeleton.process import *
 
 def is_valid_candidate(node, degree_one_nodes, graph, min_degree_one_nodes=5, min_distance=5):
     """Checks if the node is more than min_distance away from at least min_degree_one_nodes nodes of degree 1."""

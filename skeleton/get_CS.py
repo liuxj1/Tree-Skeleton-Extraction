@@ -2,8 +2,8 @@ import networkx as nx
 import json
 import numpy as np
 from functools import lru_cache
-from Algorithm1 import Ring_Structure_Detection_and_Filtering
-from Algorithm2 import Global_Growth_Direction_Feature_Filtering
+from skeleton.Algorithm1 import Ring_Structure_Detection_and_Filtering
+from skeleton.Algorithm2 import Global_Growth_Direction_Feature_Filtering
 
 def angle_between(v1, v2):
     """

@@ -1,6 +1,5 @@
 import open3d as o3d
-import numpy as np
-import networkx as nx
+import argparse
 import json
 import matplotlib
 from scipy.spatial.transform import Rotation as R
@@ -231,10 +230,15 @@ def main(CMSBs_path,BPs_path):
     process_and_draw(new_skeleton, color_map, finally_pairs, process=True)
 
 if __name__ == '__main__':
-    # input_pcd = "../datas/input_pcd/reality_example1.txt"
 
-    CMSBs_path = "../datas/CMSBs/reality_example1_CMSBs.json"   # Stores skeleton files that complete missing skeleton branches
-    BPs_path = "../datas/BPs/reality_example1_BPs.txt"    # Store branch point pairs for reconnection
+    parser = argparse.ArgumentParser(description="Run Visualization Progress")
+    parser.add_argument('--cmsbs', required=True, help="Path to the CMSBs file")
+    parser.add_argument('--bps', required=True, help="Path to the BPs file")
+    args = parser.parse_args()
+
+    CMSBs_path = args.cmsbs
+    BPs_path = args.bps
+
     main(CMSBs_path, BPs_path)
 
 
