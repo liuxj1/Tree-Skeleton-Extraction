@@ -1,5 +1,5 @@
 import matplotlib
-matplotlib.use('agg')  # 使用非交互式后端
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import open3d as o3d
 import json
@@ -128,7 +128,7 @@ def create_point_cloud_and_lineset(skeleton, color_map, new_pairs=None):
     line_colors = []
     for start, end in skeleton.edges:
         if new_pairs and ((start, end) in new_pairs or (end, start) in new_pairs):
-            line_colors.append([1, 0, 0])  # 绿色
+            line_colors.append([1, 0, 0])
         else:
             line_colors.append(color_map.get(start, [0, 0, 0]))
 
@@ -201,9 +201,9 @@ def get_break_skeleton(data_points):
     print(colors)
     for i, label in enumerate(colors):
         colors[i] = [0, 1, 0]
-    skeleton_nodes, skeleton_colors = calculate_skeleton_nodes(clusters, data_points, colors)
+    skeleton_nodes = calculate_skeleton_nodes(clusters, data_points)
     # Generate Skeleton
-    skeleton = generate_skeleton(skeleton_nodes, skeleton_colors, clusters, data_points)
+    skeleton = generate_skeleton(skeleton_nodes, clusters, data_points)
     # Clean skeleton, synthetic dataset is not used
     cleaned_skeleton = prune_skeleton(skeleton)
     # cleaned_skeleton = skeleton
@@ -220,8 +220,8 @@ def get_break_skeleton(data_points):
 
 
 if __name__ == "__main__":
-    input_pcd_path = "path/to/pcd_file"     # Input incomplete tree point cloud
+    input_pcd_path = "../datas/input_pcd/reality_example1.txt"     # Input incomplete tree point cloud
 
-    data_points = load_and_preprocess_pcd(input_pcd_path)
+    data_points = load_and_preprocess_pcd(input_pcd_path, "reality")
     get_break_skeleton(data_points)
 

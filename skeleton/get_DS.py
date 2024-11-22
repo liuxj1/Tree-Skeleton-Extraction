@@ -233,7 +233,6 @@ def get_break_skeleton(data_points, output_MSBs_filename, output_BPs_filename,ou
     if datasets_type == 'reality':
         pruned_skeleton = prune_skeleton(skeleton)
         skeleton_subgraphs = extract_skeleton_subgraphs(pruned_skeleton)
-        # 确定节点数最多的子骨架
         max_nodes_subgraph = max(skeleton_subgraphs, key=lambda sg: len(sg.nodes))
         # Determine the sub-skeleton with the most nodes as the sub-skeleton and do not smooth it for now
         smoothed_positions_all = []
@@ -256,7 +255,7 @@ def get_break_skeleton(data_points, output_MSBs_filename, output_BPs_filename,ou
     save_graph_json(skeleton, output_MSBs_filename)
 
     print(f"\nWriting: {output_MSBs_filename}")
-    print("\n       ===========补全断裂骨架===========")
+    print("\n       ===========Completion phase===========")
     completion(skeleton, output_BPs_filename, output_CMSBs_filename)
 
 

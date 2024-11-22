@@ -1,6 +1,7 @@
 import open3d as o3d
 import argparse
 import json
+import random
 import matplotlib
 from scipy.spatial.transform import Rotation as R
 matplotlib.use('agg')  # 使用非交互式后端
@@ -235,6 +236,9 @@ if __name__ == '__main__':
     parser.add_argument('--cmsbs', required=True, help="Path to the CMSBs file")
     parser.add_argument('--bps', required=True, help="Path to the BPs file")
     args = parser.parse_args()
+
+    random.seed(42)
+    np.random.seed(42)
 
     CMSBs_path = args.cmsbs
     BPs_path = args.bps

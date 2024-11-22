@@ -157,7 +157,7 @@ def main(json_path, pcd_path):
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(data_points)
     pcd.colors = o3d.utility.Vector3dVector(colors)
-    custom_draw_geometry_with_no_light([pcd])
+    # custom_draw_geometry_with_no_light([pcd])
 
     color_map = assign_colors_to_components(new_skeleton)
 
@@ -175,7 +175,7 @@ def main(json_path, pcd_path):
 
     spheres = create_spheres_at_nodes(new_skeleton, color_map)
 
-    custom_draw_geometry_with_no_light([point_cloud] + line_set + spheres)
+    # custom_draw_geometry_with_no_light([point_cloud] + line_set + spheres)
 
     gray_color = [0.5, 0.5, 0.5]
     colors = np.tile(gray_color, (len(data_points), 1))
@@ -186,6 +186,6 @@ def main(json_path, pcd_path):
 
 if __name__ == "__main__":
     json_path = "../datas/1.json"
-    pcd_path = "path/to/pcd"
+    pcd_path = "../datas/input_pcd/reality_example1.txt"
     main(json_path, pcd_path)
 

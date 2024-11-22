@@ -187,9 +187,6 @@ def plot_accuracy(all_accuracy,all_misdetection_rate):
     plt.show()
 
 if __name__ == "__main__":
-    random.seed(42)
-    np.random.seed(42)
-
     parser = argparse.ArgumentParser(description="Process skeletons for synthetic dataset evaluation")
     parser.add_argument('--processing_mode', required=True, choices=['single', 'batch'], help="Processing mode: single or batch")
     parser.add_argument('--cmsbs_path', required=True, help="Path to the CMSBs file or folder")
@@ -197,13 +194,14 @@ if __name__ == "__main__":
     parser.add_argument('--skeleton_path', required=True, help="Path to the skeleton file or folder")
     parser.add_argument('--output_file_path', required=True, help="Path to the output result file")
     args = parser.parse_args()
+    random.seed(42)
+    np.random.seed(42)
 
     all_accuracy = []
     all_misdetection_rate = []
     average_break = []
 
     if args.processing_mode == 'batch':
-        # 批处理模式
         with open(args.output_file_path, "w") as output_file:
             for filename in tqdm(os.listdir(args.cmsbs_path), desc="Processing labels"):
                 if filename.endswith('.json'):
