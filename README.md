@@ -10,6 +10,7 @@ The point cloud data obtained by 3D reconstruction of the tree body is missing, 
 git clone https://github.com/liuxj1/Tree-Skeleton-Extraction.git
 cd Tree-Skeleton-extraction
 conda create -n skeleton python=3.7.0
+conda activate skeleton
 pip install -r requirements.txt
    ```
 # Basic Usage
@@ -41,16 +42,19 @@ Tree-Skeleton-Extraction/
 3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple<br>
 ## Start
 ### 1.Get skeleton
+If there is no data in the project or the data is not available, you can download [Test Datasets Link](https://drive.google.com/drive/folders/1AVYqXS4l93UGSojt150_JB6L2u9JvjGK?usp=sharing). <br>
 You need to set `Processing_mode` to `single` in `main.py`, and give the corresponding input point cloud file and output file path in the corresponding position.
-We have given the data file directory format. You can refer to the data directory to put the corresponding data into the specified location.Then，Run the following command.
-   ``` For a single tree
+We have given the data file directory format. You can refer to the data directory to put the corresponding data into the specified location.Then，Run the following command.<br>
+For a single tree:   
+   ``` 
 python main.py
    --processing_mode single \
    --input_pcd_path "datas/single_data/input_pcd/reality_example1.txt" \
    --datasets_type "reality" \
    --disconnections_num 8
    ```
-   ``` For batch
+Doenload [Datasets Link](https://drive.google.com/drive/folders/1-F2EuWzzmbOaRrjwM_7wXedgUqyQjoXI?usp=sharing) For batch: 
+   ``` 
 python main.py
    --processing_mode batch \
    --type_name reality \
@@ -79,8 +83,9 @@ python reality_visual_evaluation.py \
 ```
 <img src="https://raw.githubusercontent.com/liuxj1/Tree-Skeleton-Extraction/main/process_files/3.png" alt="Reality Visual Evaluation" width="450"/>
 
-For `synthetic`, we define the evaluation method.
-```For a single tree
+For `synthetic`, we define the evaluation method.<br>
+For a single tree:
+```
 python synthetic_evaluation.py \
    --processing_mode "single"
    --cmsbs "datas/single_data/CMSBs/complex_example2_CMSBs.json" \
@@ -88,7 +93,8 @@ python synthetic_evaluation.py \
    --skeleton_path "datas/single_data/skeleton/complex_example2_imitaet_S.json" \
    --output_file_path "datas/single_data/complex_example2_result.txt"
 ``` 
-```For batch
+For batch:
+```
 python synthetic_evaluation.py \
    --processing_mode "batch"
    --cmsbs "datas/complex/CMSBs" \
