@@ -39,7 +39,7 @@ Tree-Skeleton-Extraction/
   - [Test Datasets Link](https://drive.google.com/drive/folders/1AVYqXS4l93UGSojt150_JB6L2u9JvjGK?usp=sharing)
   
 2.When using different datasets, you need to determine the `datasets_type`, including `reality` and `synthetic`, where `complex` and `simple` both belong to `synthetic`.<br>
-3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in complex and 8 in simple<br>
+3.Among them, `disconnections_num` is used to determine how many discontinuous regions the synthetic simulation has. For example, when using it, we set it to 28 in `complex` and 8 in `simple`. <br>
 ## Start
 ### 1.Get skeleton
 If there is no data in the project or the data is not available, you can download [Test Datasets Link](https://drive.google.com/drive/folders/1AVYqXS4l93UGSojt150_JB6L2u9JvjGK?usp=sharing). <br>
@@ -129,4 +129,4 @@ pip install --upgrade pip setuptools
 pip install -r requirements.txt
 pip install -e .
 ```
-`run Meyer/pcd_skeletor/laplacian.py`. You will get `1.jsonThen`, then `run Meyer_method.py` 
+`run Meyer/pcd_skeletor/laplacian.py`. You will get `1.json. Then`, then `run Meyer_method.py` 
